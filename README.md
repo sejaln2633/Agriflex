@@ -1,4 +1,4 @@
-AgriFlex: Agricultural Equipment Rental System
+AgriFlex
 Description:
 AgriFlex is a web-based platform designed to facilitate the rental and leasing of agricultural equipment. It aims to provide farmers with an efficient means to rent or lease machinery for a specified period while allowing customers to browse available equipment and make rental bookings. The application automatically tracks rented equipment and displays availability status.
 
@@ -11,6 +11,8 @@ Farmers can log in using their credentials to view and manage the equipment they
 
 Customer:
 Customers can log in to browse available equipment, filter based on price and availability, and submit rental applications. Once approved, they can complete the payment process. Customers can also view their rental history and payment status.
+
+
 
 System Composition:
 This application consists of two main parts:
@@ -26,6 +28,8 @@ Handles data storage, processing, and business logic, including equipment manage
 Technologies Used: Java, Jakarta Servlets, JDBC, MySQL
 
 Server: Apache Tomcat
+
+
 
 Project Requirements:
 Project Name: AgriFlex: Agricultural Equipment Rental System
