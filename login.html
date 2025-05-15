@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - AgriFlex</title>
+    <style>
+        /* 🔥 Blurry Background using ::before */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url('image/MAINIMAGE3.jpg') no-repeat center center/cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* Main Body Setup */
+        body {
+            font-family: Arial, sans-serif;
+            color: rgb(255, 255, 255);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 🎯 Heading */
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        /* 📌 Login Container */
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            animation: slideIn 1.2s ease-in-out;
+            backdrop-filter: blur(4px); /* Extra glassy effect */
+        }
+
+        /* 📝 Inputs */
+        input {
+            width: 95%;
+            padding: 14px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            outline: none;
+            transition: transform 0.3s;
+        }
+
+        input:focus {
+            transform: scale(1.05);
+        }
+
+        /* 🔘 Login Button */
+        button {
+            background: #00c213;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #d5fb02;
+            transform: scale(1.05);
+        }
+
+        /* 🔙 Back to Registration Button */
+        .back-button {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            font-size: 18px;
+            margin-top: 15px;
+            padding: 12px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: #ff4b5c;
+        }
+
+        /* ✨ Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        /* 🔥 Enhanced Animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.9);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(20px) scale(1.05);
+    }
+    80% {
+        transform: translateY(-10px) scale(0.97);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 👇 Apply new animation to container */
+.container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    animation: bounceIn 1s ease;
+}
+.container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    animation: bounceIn 1s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* ✨ Hover Animation */
+.container:hover {
+    transform: scale(1.05); /* Slight zoom */
+    box-shadow: 0 12px 30px rgba(0, 255, 145, 0.6); /* Glowing shadow */
+    backdrop-filter: blur(6px) saturate(130%); /* Slightly more blur + vibrant */
+}
+
+        
+    </style>
+</head>
+<body>
+
+    <h1>Login to AgriFlex</h1>
+    <div class="container">
+        <form action="LoginServlet" method="post">
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+         <!-- ✅ Back to Registration Button -->
+        <button class="back-button" onclick="goBack()">Registration</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = "register.html";
+        }
+    </script>
+
+</body>
+</html>

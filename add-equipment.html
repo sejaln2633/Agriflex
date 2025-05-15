@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Equipment</title>
+    <style>
+         /* Body background with image and blur */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('image/farm-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            color: #2d3436;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px #ccc;
+        }
+
+        input, textarea, select, button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px auto;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #74b9ff;
+            box-shadow: 0 0 5px #74b9ff;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            background-color: #00b894;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #019875;
+        }
+
+        /* Back to Dashboard */
+        .back-btn {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #74b9ff;
+            color: #2d3436;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #0984e3;
+            color: white;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Equipment</h2>
+        <form action="AddEquipmentServlet" method="post">
+            <input type="text" name="name" placeholder="Equipment Name" required>
+            <textarea name="description" placeholder="Description" required></textarea>
+            <input type="number" step="0.01" name="rental_price" placeholder="Rental Price" required>
+            <select name="availability_status" required>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select>
+            <button type="submit">Add Equipment</button>
+        </form>
+        <a href="farmer-dashboard.html" class="back-btn">BACK TO DASHBOARD</a>
+    </div>
+</body>
+</html>

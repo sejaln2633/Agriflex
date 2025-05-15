@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Reports</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #e0f7fa, #f1f8ff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      animation: slideUp 0.6s ease-out;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 12px;
+    }
+    .container:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #34495e;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 4px;
+      margin: 10px auto 0;
+      background: linear-gradient(to right, #00b894, #6c5ce7);
+      border-radius: 5px;
+    }
+
+    label {
+      font-weight: 600;
+      margin: 0 10px;
+      color: #2c3e50;
+    }
+
+    select,
+    input[type="date"] {
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 10px;
+      font-size: 15px;
+      width: 180px;
+      transition: all 0.3s ease;
+    }
+
+    select:focus,
+    input[type="date"]:focus {
+      outline: none;
+      border-color: #6c5ce7;
+      box-shadow: 0 0 5px rgba(108, 92, 231, 0.3);
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      margin: 15px 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-generate {
+      background: linear-gradient(to right, #00b894, #00cec9);
+    }
+
+    .btn-generate:hover {
+      background: linear-gradient(to right, #00cec9, #00b894);
+      transform: translateY(-2px);
+    }
+
+    .btn-download {
+      background: linear-gradient(to right, #0984e3, #6c5ce7);
+    }
+
+    .btn-download:hover {
+      background: linear-gradient(to right, #6c5ce7, #0984e3);
+      transform: translateY(-2px);
+    }
+
+    .btn-print {
+      background: linear-gradient(to right, #fdcb6e, #e17055);
+    }
+
+    .btn-print:hover {
+      background: linear-gradient(to right, #e17055, #fdcb6e);
+      transform: translateY(-2px);
+    }
+
+    #reportResult {
+      margin-top: 30px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .report-table th {
+      background: #00b894;
+      color: white;
+      padding: 14px;
+      text-align: left;
+    }
+
+    .report-table td {
+      padding: 14px;
+      border-bottom: 1px solid #eee;
+      background: #fdfdfd;
+    }
+
+    .report-table tr:hover td {
+      background-color: #f1faff;
+      transition: 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      select, input[type="date"] {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    .back-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #4CAF50, #2E7D32); /* Green Gradient */
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.back-btn::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+}
+
+.back-btn:hover::after {
+  left: 100%;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start; /* You can use center if you want it centered */
+}
+
+@media (max-width: 768px) {
+  .button-group {
+    align-items: stretch;
+  }
+
+  .back-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+    
+    </style>
+    <script>
+        function generateReport() {
+            var reportType = document.getElementById("reportType").value;
+            var startDate = document.getElementById("startDate").value;
+            var endDate = document.getElementById("endDate").value;
+
+            if (reportType === "") {
+                alert("Please select a report type!");
+                return;
+            }
+
+            document.getElementById("reportResult").innerHTML = "Fetching report data...";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "GenerateReportServlet?reportType=" + reportType + "&startDate=" + startDate + "&endDate=" + endDate, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("reportResult").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        function printReport() {
+            window.print();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Generate Reports</h2>
+        <label for="reportType">Select Report:</label>
+        <select id="reportType">
+            <option value="">-- Select --</option>
+            <option value="users">User Report</option>
+            <option value="equipment">Equipment Report</option>
+            <option value="rentals">Rental Report</option>
+            <option value="payments">Payment Report</option>
+        </select>
+
+        <label for="startDate">From:</label>
+        <input type="date" id="startDate">
+
+        <label for="endDate">To:</label>
+        <input type="date" id="endDate">
+
+        <button class="btn btn-generate" onclick="generateReport()">Generate Report</button>
+
+        <div id="reportResult"></div>
+<div class="button-group">
+    <button class="btn btn-print" onclick="printReport()">Print Report</button>
+    <a href="admin-dashboard.html" class="back-btn">BACK TO DASHBOARD</a>
+</div>
+
+   
+    
+</div>
+
+
+    
+</body>
+</html>

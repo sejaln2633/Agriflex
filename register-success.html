@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+    <style>
+         body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 25px;
+      color: #2d2d2d;
+      text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+      animation: slideDown 1s ease;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .container p {
+      font-size: 18px;
+      margin: 15px 0;
+      color: #444;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #4CAF50;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    a:hover {
+      background-color: #388e3c;
+    }
+
+    /* ✨ Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Registration Successful!</h1>
+    <div class="container">
+        <p>Your account has been created successfully.</p>
+        <p><a href="login.html" style="color: yellow;">Click here to login</a></p>
+    </div>
+
+</body>
+</html>

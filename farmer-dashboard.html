@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Farmer Dashboard</title>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('image/farm-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome {
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      margin: 40px auto 30px;
+      padding: 20px 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.05);
+      width: fit-content;
+      letter-spacing: 1px;
+      transition: all 0.4s ease;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    .welcome:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+
+    .container h2 {
+      margin-bottom: 30px;
+      color: #2d3436;
+      font-size: 32px;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    .section {
+      margin: 20px 0;
+      padding: 15px 25px;
+      background: #74b9ff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease-in-out, background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .section:hover {
+      background: #0984e3;
+      transform: scale(1.05);
+    }
+
+    .section a {
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section svg {
+      width: 22px;
+      height: 22px;
+    }
+    .farmer-image {
+      position: fixed;
+      top: 100px;
+      right: 100px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+      z-index: 9999;
+    }
+
+    .farmer-image img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .farmer-image:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .back-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: linear-gradient(to right, #74b9ff, #f8a5c2);
+      color: #2d3436;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transition: background 0.4s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(to right, #74b9ff, #f78fb3);
+      color: white;
+      transform: scale(1.06);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .container a.logout-icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #e74c3c; /* Red background */
+  color: #fff; /* White text */
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(231, 76, 60, 0.4);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.container a.logout-icon-link:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6);
+}
+    
+    
+  </style>
+</head>
+<body>
+<!-- Farmer Image in Top-Right Corner -->
+  <div class="farmer-image">
+    <img src="image/farmericonss.jpg" alt="Farmer Icon">
+  </div>
+  <div class="welcome">Welcome, Farmer</div>
+  <div class="container">
+    <h2>Farmer Dashboard</h2>
+
+    <div class="section">
+      <a href="add-equipment.html"><i data-lucide="plus-circle"></i> Add Equipment</a>
+    </div>
+
+    <div class="section">
+      <a href="view-my-equipments.html"><i data-lucide="list"></i> View My Equipment</a>
+    </div>
+
+    <div class="section">
+      <a href="view-rentals.html"><i data-lucide="shopping-cart"></i> View My Rentals</a>
+    </div>
+
+    <div class="section">
+      <a href="viewPaymentHistory.html"><i data-lucide="dollar-sign"></i> View Payment History</a>
+    </div>
+   <a href="logout" class="logout-icon-link"><i data-lucide="log-out" class="logout-icon"></i> Logout</a>
+   
+  </div>
+
+  <a href="maindashboard.html" class="back-btn"><i data-lucide="arrow-left-circle"></i> BACK TO MAIN DASHBOARD</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("Farmer Dashboard Loaded");
+      lucide.createIcons(); // Activate Lucide icons
+    });
+  </script>
+</body>
+</html>

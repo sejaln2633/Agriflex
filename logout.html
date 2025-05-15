@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            text-align: center;
+            padding-top: 100px;
+        }
+        h2 {
+            color: white;
+        }
+        button {
+            background: #ff4b5c;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #e03e4d;
+        }
+    </style>
+    <script>
+        function logoutUser() {
+            window.location.href = "logout"; // Calls the LogoutServlet
+        }
+    </script>
+</head>
+<body>
+
+<h2>You have been logged out successfully!</h2>
+<button onclick="logoutUser()">Go to Login</button>
+
+</body>
+</html>

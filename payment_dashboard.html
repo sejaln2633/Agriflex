@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Dashboard - AgriFlex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+        .payment-container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .total-amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h2>Complete Payment</h2>
+    <form action="ProcessPaymentServlet" method="post" onsubmit="return validatePayment();">
+
+        <!-- Hidden or prefilled fields -->
+        <input type="hidden" name="rental_id" value="1" id="rental_id">
+        <input type="hidden" name="customer_id" value="2" id="customer_id">
+        <input type="hidden" name="equipment_id" value="5" id="equipment_id">
+        <input type="hidden" name="farmer_id" value="4" id="farmer_id">
+
+        <!-- Dates (readonly or selectable) -->
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="2025-04-01" readonly>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="2025-04-03" readonly>
+
+        <!-- Rental price (hidden or shown as info) -->
+        <label for="rental_price">Rental Price per Day (₹):</label>
+        <input type="number" id="rental_price" name="rental_price" value="500" readonly>
+
+        <!-- Total (auto-calculated by JS) -->
+        <div class="total-amount">
+            Total to be Paid: ₹<span id="total_display">0</span>
+        </div>
+
+        <!-- Pass calculated amount to backend -->
+        <input type="hidden" id="amount" name="amount" value="">
+
+        <label for="payment_method">Select Payment Method:</label>
+        <select name="payment_method" id="payment_method" required>
+            <option value="">--Select--</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="UPI">UPI</option>
+            <option value="Net Banking">Net Banking</option>
+        </select>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+
+<script>
+    function calculateAmount() {
+        const start = new Date(document.getElementById("start_date").value);
+        const end = new Date(document.getElementById("end_date").value);
+        const pricePerDay = parseFloat(document.getElementById("rental_price").value);
+
+        const timeDiff = end.getTime() - start.getTime();
+        let days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        if (days <= 0) days = 1;
+
+        const total = pricePerDay * days;
+
+        document.getElementById("total_display").innerText = total.toFixed(2);
+        document.getElementById("amount").value = total.toFixed(2);
+    }
+
+    function validatePayment() {
+        const method = document.getElementById("payment_method").value;
+        if (method === "") {
+            alert("Please select a payment method.");
+            return false;
+        }
+        return true;
+    }
+
+    // Trigger amount calculation on load
+    window.onload = calculateAmount;
+</script>
+
+</body>
+</html>

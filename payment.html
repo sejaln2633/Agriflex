@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+</head>
+<body>
+
+    <form action="PaymentDashboardServlet" method="GET">
+    <p><strong>Equipment Name:</strong> <span id="equipmentName"></span></p>
+    <p><strong>Farmer Name:</strong> <span id="farmerName"></span></p>
+    <p><strong>Rental Price:</strong> ₹<span id="rentalPrice"></span></p>
+
+    <!-- Ensure these hidden fields are filled correctly -->
+    <input type="hidden" name="rental_id" id="rental_id">
+    <input type="hidden" name="customer_id" id="customer_id">
+    <input type="hidden" name="equipment_id" id="equipment_id">
+    <input type="hidden" name="farmer_id" id="farmer_id">
+    <input type="hidden" name="amount" id="amount">
+
+    <button type="submit">Pay Now</button>
+</form>
+
+<script>
+    // Example of setting values dynamically (replace with actual data)
+    document.getElementById("rental_id").value = "1";
+    document.getElementById("customer_id").value = "101";
+    document.getElementById("equipment_id").value = "5";
+    document.getElementById("farmer_id").value = "202";
+    document.getElementById("amount").value = "500";
+</script>
+    
+
+</body>
+</html>

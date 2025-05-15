@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgriFlex - Login And Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            width: 300px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #ff4b5c;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #e03e4d;
+        }
+
+        .error {
+            color: yellow;
+            font-size: 14px;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            let role = document.forms["registerForm"]["role"].value;
+            let email = document.forms["registerForm"]["email"].value;
+            let password = document.forms["registerForm"]["password"].value;
+
+            if (role === "" || email === "" || password === "") {
+                alert("All fields are required!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+
+
+<h2>Register as Farmer/Customer</h2>
+<div class="container">
+    <form name="registerForm" action="RegisterServlet" method="post" onsubmit="return validateForm()">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <select name="role">
+            <option value="">Select Role</option>
+            <option value="farmer">Farmer</option>
+            <option value="customer">Customer</option>
+        </select>
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+</body>
+</html>

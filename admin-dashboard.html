@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+   
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Blurry Background Image Layer */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("image/adminbg.jpg") no-repeat center center/cover;
+    filter: blur(8px);
+    z-index: -1;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeInSlide 1s ease-out;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes fadeInSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
+
+  .welcome-msg {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 14px 24px;
+    background: #4dabf7;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu a:hover {
+    background: #339af0;
+    transform: translateY(-3px);
+  }
+
+  .menu a[href="logout"] {
+    background: #e74c3c;
+  }
+
+  .menu a[href="logout"]:hover {
+    background: #c0392b;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin: 30px auto;
+    text-decoration: none;
+    background: linear-gradient(to right, #5f9cff, #007bff);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-btn:hover {
+    background: linear-gradient(to right, #4a90e2, #0069d9);
+    transform: scale(1.05);
+  }
+
+  .menu svg,
+  .logout-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      flex-direction: column;
+    }
+
+    .menu a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Admin Dashboard</h2>
+    <div class="welcome-msg">Welcome, Admin 👋</div>
+    <div class="menu">
+      <a href="view-users.html"><i data-lucide="users"></i> Manage Users</a>
+      <a href="manage-equipment.html"><i data-lucide="settings"></i> Manage Equipment</a>
+      <a href="view-payments.html"><i data-lucide="credit-card"></i> View Payments</a>
+      <a href="view-reports.html"><i data-lucide="file-bar-chart-2"></i> Generate Reports</a>
+      <a href="logout"><i data-lucide="log-out" class="logout-icon"></i> Logout</a>
+    </div>
+  </div>
+
+  <a href="maindashboard.html" class="back-btn">
+    <i data-lucide="arrow-left-circle"></i> BACK TO MAIN DASHBOARD
+  </a>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

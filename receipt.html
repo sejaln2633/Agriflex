@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+</head>
+<body>
+    <h2>Payment Receipt</h2>
+    
+    <p><strong>Customer ID:</strong> <span id="customer_id"></span></p>
+    <p><strong>Equipment Name:</strong> <span id="equipment_name"></span></p>
+    <p><strong>Farmer Name:</strong> <span id="farmer_name"></span></p>
+    <p><strong>Amount Paid:</strong> <span id="amount"></span></p>
+    <p><strong>Payment Method:</strong> <span id="payment_method"></span></p>
+    <p><strong>Transaction Date:</strong> <span id="transaction_date"></span></p>
+
+    <button onclick="window.print()">Print Receipt</button>
+    <button onclick="downloadReceipt()">Download Receipt</button>
+
+    <script>
+        function downloadReceipt() {
+            let content = document.body.innerHTML;
+            let blob = new Blob([content], { type: "text/html" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "receipt.html";
+            link.click();
+        }
+    </script>
+</body>
+</html>

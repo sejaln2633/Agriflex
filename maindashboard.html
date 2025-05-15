@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Main Dashboard - AgriFlex</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #121212;
+      position: fixed;
+      top: 0;
+      left: 0;
+      box-shadow: 0 4px 10px rgba(242, 243, 242, 0.3);
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #f8fff9;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .auth-buttons button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .auth-buttons button:hover {
+      background-color: #00ffbf;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px #00ffbf;
+    }
+
+    .dashboard-container {
+      width: 95%;
+      max-width: 2000px;
+      background: #121212;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 255, 0, 0.3);
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    h1 {
+      color: #ebedeb;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      background: #000000;
+      padding: 20px 0;
+      margin-top: 20px;
+    }
+
+    .slide-track {
+      display: flex;
+      width: calc(260px * 8);
+      animation: slide 25s linear infinite;
+    }
+
+    .slide {
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin: 0 10px;
+      border-radius: 0;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .crop-info, .equipment-section {
+      margin-top: 30px;
+      background: #1b1b1b;
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    .crop-info h2, .equipment-section h2 {
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      color: #f2ff01;
+    }
+
+    .equipment-section h2 {
+      color: #e5ed0b;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    li {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 255, 0, 0.2);
+      display: flex;
+      align-items: center;
+      width: 400px;
+      gap: 15px;
+      text-align: left;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    li:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 255, 153, 0.4);
+      background: #2d2d2d;
+    }
+
+    li img {
+      width: 300px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    li:hover img {
+      transform: scale(1.03);
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info span {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    .info p {
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    /* Modal and overlay styles */
+    #crop-detail {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a1a;
+      border: 2px solid #4CAF50;
+      padding: 30px;
+      border-radius: 10px;
+      width: 600px;
+      z-index: 1001;
+      color: #f1f1f1;
+      box-shadow: 0 0 30px rgba(0, 255, 128, 0.5);
+    }
+
+    #crop-detail h2 {
+      color: #d4ff00;
+      margin-bottom: 10px;
+    }
+
+    #crop-detail button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #00ffbf;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #crop-detail button:hover {
+      background-color: #00cc99;
+      color: white;
+    }
+
+    #crop-detail .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 20px;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo"><h2>AgriFlex</h2></div>
+    <div class="auth-buttons">
+      <button onclick="location.href='login.html'"><h2>Login</h2></button>
+      <button onclick="location.href='register.html'"><h2>Register</h2></button>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <h1>Welcome to AgriFlex Dashboard</h1>
+
+    <div class="slider">
+      <div class="slide-track">
+        <img class="slide" src="image/FARM_IMAGE.jpg" alt="Image 1">
+        <img class="slide" src="image/MAINIMAGE4.jpg" alt="Image 2">
+        <img class="slide" src="image/alongequip.jpg" alt="Image 3">
+        <img class="slide" src="image/IMAGE8.jpg" alt="Image 4">
+        <img class="slide" src="image/MAINIMAGE.jpg" alt="Image 5">
+        <img class="slide" src="image/TRACTOR1.jpg" alt="Image 6">
+        <img class="slide" src="image/MAINIMAGE2.jpg" alt="Image 7">
+        <img class="slide" src="image/image8.jpg" alt="Image 8">
+      </div>
+    </div>
+
+    <div class="crop-info">
+      <h2>Popular Crops</h2>
+      <ul>
+        <li onclick="showCropDetails('wheat')">
+          <img src="image/wheat.jpg" alt="Wheat">
+          <div class="info">
+            <span>WHEAT - Summer</span>
+            <p>Requires moderate temperature and is sown during spring/summer.</p>
+          </div>
+        </li>
+        <li onclick="showCropDetails('rice')">
+          <img src="image/rice.jpg" alt="Rice">
+          <div class="info">
+            <span>RICE - Winter</span>
+            <p>Grows well in wet fields and tropical climates.</p>
+          </div>
+        </li>
+        <li onclick="showCropDetails('corn')">
+          <img src="image/corn.jpg" alt="Corn">
+          <div class="info">
+            <span>CORN - Autumn</span>
+            <p>Best harvested in fall, used for grain and fodder.</p>
+          </div>
+        </li>
+        <li onclick="showCropDetails('cotton')">
+          <img src="image/cotton.jpg" alt="Cotton">
+          <div class="info">
+            <span>COTTON - Spring</span>
+            <p>Fiber crop that thrives in warm climates with plenty of sun.</p>
+          </div>
+        </li>
+        <li onclick="showCropDetails('sugarcane')">
+          <img src="image/sugarcane.jpg" alt="Sugarcane">
+          <div class="info">
+            <span>SUGARCANE - Summer</span>
+            <p>Needs abundant water and grows tall with high sugar content.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="equipment-section">
+      <h2>Farming Equipment</h2>
+      <ul>
+        <li>
+          <img src="image/tractor.jpg" alt="Tractor">
+          <div class="info">
+            <span>TRACTOR</span>
+            <p>Multipurpose machine used for plowing, tilling, and hauling.</p>
+          </div>
+        </li>
+        <li>
+          <img src="image/plow.jpg" alt="Plow">
+          <div class="info">
+            <span>PLOW</span>
+            <p>Used to loosen and turn soil before planting.</p>
+          </div>
+        </li>
+        <li>
+          <img src="image/seeder.jpg" alt="Seeder">
+          <div class="info">
+            <span>SEEDER</span>
+            <p>Plants seeds evenly in the field with precision.</p>
+          </div>
+        </li>
+        <li>
+          <img src="image/harvester.jpg" alt="Harvester">
+          <div class="info">
+            <span>HARVESTER</span>
+            <p>Efficiently harvests crops like wheat, rice, and corn.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modal Overlay and Popup -->
+  <div id="overlay"></div>
+  <div id="crop-detail">
+    <button class="close-btn" onclick="closeDetail()">×</button>
+    <h2 id="crop-name"></h2>
+    <p><strong>Crop Information:</strong> <span id="crop-info"></span></p>
+    <p><strong>Pest Management:</strong> <span id="crop-pests"></span></p>
+    <p><strong>When to Grow:</strong> <span id="crop-when-grow"></span></p>
+    <p><strong>When Not to Grow:</strong> <span id="crop-when-not-grow"></span></p>
+    <button onclick="closeDetail()">Close</button>
+  </div>
+
+  <script>
+    const cropsData = {
+      wheat: {
+        name: "Wheat",
+        info: "Wheat requires moderate temperature and is sown during spring/summer.",
+        pests: "Watch for aphids, armyworms, and wheat rust. Use resistant varieties and timely fungicide application.",
+        grow: "Best sown between March and April in well-drained soil.",
+        notGrow: "Avoid sowing in extreme cold or waterlogged soil.",
+      },
+      rice: {
+        name: "Rice",
+        info: "Rice grows well in wet fields and tropical climates.",
+        pests: "Brown planthopper, stem borers. Use IPM and keep water levels managed.",
+        grow: "Best grown in June-July during monsoon.",
+        notGrow: "Avoid sowing in dry or cold seasons.",
+      },
+      corn: {
+        name: "Corn",
+        info: "Corn is harvested in fall and used for grain and fodder.",
+        pests: "Fall armyworm and corn borers are common. Monitor fields and apply biopesticides.",
+        grow: "Sow in early spring or summer for autumn harvest.",
+        notGrow: "Avoid during frost-prone months.",
+      },
+      cotton: {
+        name: "Cotton",
+        info: "Fiber crop that thrives in warm climates with plenty of sun.",
+        pests: "Bollworms and aphids. Use Bt cotton and integrated pest management.",
+        grow: "Plant in late spring after frost danger is over.",
+        notGrow: "Avoid in cooler or overly wet climates.",
+      },
+      sugarcane: {
+        name: "Sugarcane",
+        info: "Needs abundant water and grows tall with high sugar content.",
+        pests: "Early shoot borer, top shoot borer. Use clean seed and avoid ratoon cropping in infected fields.",
+        grow: "Grow from February to April.",
+        notGrow: "Avoid sowing in cold winter months or in drought-prone zones.",
+      },
+    };
+
+    function showCropDetails(cropKey) {
+      const crop = cropsData[cropKey];
+      if (crop) {
+        document.getElementById("crop-name").textContent = crop.name;
+        document.getElementById("crop-info").textContent = crop.info;
+        document.getElementById("crop-pests").textContent = crop.pests;
+        document.getElementById("crop-when-grow").textContent = crop.grow;
+        document.getElementById("crop-when-not-grow").textContent = crop.notGrow;
+
+        document.getElementById("crop-detail").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    function closeDetail() {
+      document.getElementById("crop-detail").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  </script>
+</body>
+</html> 

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - AgriFlex</title>
+    <style>
+        /* Background Blur Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url('image/registerbg.jpg') no-repeat center center/cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            width: 360px;
+            backdrop-filter: blur(10px); /* Glass effect */
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        input, select {
+            width: 90%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            color: #2b2b2b;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus, select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: yellow;
+            box-shadow: 0 0 10px yellow;
+        }
+
+        button {
+            background: linear-gradient(to right, #7dda0c, #ff4b5c);
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #ff4b5c, #ff416c);
+            box-shadow: 0 0 15px rgba(255, 75, 92, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .login-link a {
+            color: rgb(37, 247, 4);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+            color: #ffcc00;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .back-btn a {
+            background: linear-gradient(to right, #0acffe, #495aff);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-btn a:hover {
+            background: linear-gradient(to right, #495aff, #0acffe);
+            box-shadow: 0 0 12px rgba(10, 207, 254, 0.7);
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let role = document.getElementById("role").value;
+
+            if (name === "" || email === "" || password === "" || role === "") {
+                alert("All fields are required!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Register as Farmer or Customer</h1>
+    <div class="container">
+        <form action="RegisterServlet" method="post" onsubmit="return validateForm()">
+            <input type="text" id="name" name="name" placeholder="Enter Name" required>
+            <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            <select id="role" name="role">
+                <option value="">Select Role</option>
+                <option value="farmer">Farmer</option>
+                <option value="customer">Customer</option>
+            </select>
+            <button type="submit">Register</button> <button type="maindashboard.html">Home</button>
+        </form>
+
+        
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+        <div class="back-btn">
+            <a href="maindashboard.html">← Back to Home</a>
+        </div>
+    </div>
+
+</body>
+</html>

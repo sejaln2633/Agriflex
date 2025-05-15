@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Equipments</title>
+  <style>
+    
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('image/farm-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px 20px 60px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 34px;
+            margin-bottom: 30px;
+            color: #2d3436;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #00b894;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        tr:hover {
+            background-color: #dff9fb;
+            transform: scale(1.01);
+            transition: all 0.2s ease-in-out;
+        }
+
+        td {
+            color: #2d3436;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0984e3;
+            color: white;
+            font-size: 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .back-btn:hover {
+            background-color: #74b9ff;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 10px;
+                background: #fff;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+                color: #636e72;
+            }
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>My Equipments</h2>
+
+    <!-- ✅ Fixed table structure -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="equipment-table">
+        <!-- Servlet will inject data here -->
+      </tbody>
+    </table>
+
+    <a href="farmer-dashboard.html" class="back-btn">Back to Dashboard</a>
+  </div>
+
+  <script>
+    function deleteEquipment(id) {
+      if (confirm("Are you sure you want to delete this equipment?")) {
+        fetch("ViewMyEquipmentsServlet", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "deleteId=" + encodeURIComponent(id)
+        })
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("equipment-table").innerHTML = data;
+        })
+        .catch(err => console.error("Delete Error:", err));
+      }
+    }
+
+    window.onload = () => {
+      fetch("ViewMyEquipmentsServlet")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("equipment-table").innerHTML = data;
+        });
+    };
+  </script>
+</body>
+</html>

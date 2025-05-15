@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Equipments</title>
+    <style>
+           /* Fonts & Background */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: #2d3436;
+            font-size: 32px;
+            margin-top: 30px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0984e3;
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            transition: background 0.3s;
+            transform: scale(1.01);
+        }
+
+        td {
+            font-size: 16px;
+            color: #2d3436;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            margin-bottom: 25px;
+        }
+
+        .filter-section input {
+            padding: 10px 12px;
+            margin: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .filter-section input:focus {
+            border-color: #74b9ff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
+        }
+
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: #00b894;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        .filter-section button:hover {
+            background-color: #019875;
+            transform: scale(1.05);
+        }
+
+        /* Back Button Styling */
+        .back-btn {
+            margin: 40px auto 30px;
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #6c5ce7;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #4834d4;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            th, td {
+                font-size: 14px;
+            }
+
+            .filter-section input, .filter-section button {
+                width: 90%;
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Available Equipments</h2>
+
+        <!-- Price Filter Section -->
+        <div class="filter-section">
+            <label>Min Price: </label>
+            <input type="number" id="minPrice" placeholder="Enter min price">
+            <label>Max Price: </label>
+            <input type="number" id="maxPrice" placeholder="Enter max price">
+            <input type="text" id="search" placeholder="Search by name">
+            
+            <button onclick="filterEquipments()">Filter</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Equipment ID</th>
+                    <th>Equipment Name</th>
+                    <th>Description</th>
+                    <th>Rental Price</th>
+                    <th>Status</th>
+                    <th>Added On</th>
+                    <th>Farmer Name</th>
+                    <th>Apply</th>
+                </tr>
+            </thead>
+            <tbody id="equipmentTableBody">
+                <!-- Equipment data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    function filterEquipments() {
+        let minPrice = document.getElementById("minPrice").value;
+        let maxPrice = document.getElementById("maxPrice").value;
+        let search = document.getElementById("search").value;
+
+        let url = `BrowseEquipmentsServlet?minPrice=${minPrice}&maxPrice=${maxPrice}&search=${search}`;
+
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("equipmentTableBody").innerHTML = data;
+            })
+            .catch(error => console.error("Error fetching equipment data:", error));
+    }
+
+
+        // Load all equipment initially
+        window.onload = filterEquipments;
+    </script>
+     <a href="customer-dashboard.html" class="back-btn">BACK TO DASHBOARD</a>
+</body>
+</html>

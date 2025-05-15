@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Rentals</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #2d3436;
+            font-size: 36px;
+            animation: slideDown 0.8s ease-in-out;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        th, td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #00b894;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            transform: scale(1.01);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .approved {
+            background-color: #d4f4dd;
+            color: #27ae60;
+        }
+
+        .rejected {
+            background-color: #fddede;
+            color: #e74c3c;
+        }
+
+        .pending {
+            background-color: #fff3cd;
+            color: #f39c12;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin: 30px auto;
+            padding: 14px 28px;
+            background-color: #6c5ce7;
+            color: white;
+            border-radius: 30px;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 8px 16px rgba(108, 92, 231, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-btn:hover {
+            background-color: #4834d4;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media screen and (max-width: 768px) {
+            table, th, td {
+                font-size: 14px;
+            }
+
+            .back-btn {
+                font-size: 14px;
+                padding: 10px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>My Rental Requests</h2>
+    <table>
+        <tr>
+            <th>Equipment</th>
+            <th>Farmer</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="rental-data"></tbody>
+    </table>
+ <a href="customer-dashboard.html" class="back-btn">BACK TO DASHBOARD</a>
+    <script>
+        fetch('ViewMyRentalsServlet')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("rental-data").innerHTML = data;
+        })
+        .catch(error => console.error('Error fetching rentals:', error));
+    </script>
+</body>
+</html>
