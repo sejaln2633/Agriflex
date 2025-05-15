@@ -32,7 +32,8 @@ Server: Apache Tomcat
 
 
 Project Requirements:
-Project Name: AgriFlex: Agricultural Equipment Rental System
+
+Project Name: AgriFlex
 
 Languages Used: Java, Jakarta Servlets
 
