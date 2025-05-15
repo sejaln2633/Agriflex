@@ -1,6 +1,6 @@
 AgriFlex
-Description:
-AgriFlex is a web-based platform designed to facilitate the rental and leasing of agricultural equipment. It aims to provide farmers with an efficient means to rent or lease machinery for a specified period while allowing customers to browse available equipment and make rental bookings. The application automatically tracks rented equipment and displays availability status.
+            Description:
+                AgriFlex is a web-based platform designed to facilitate the rental and leasing of agricultural equipment. It aims to provide farmers with an efficient means to rent or lease machinery for a specified period while allowing customers to browse available equipment and make rental bookings. The application automatically tracks rented equipment and displays availability status.
 
 User Modules:
 Admin:
@@ -14,7 +14,7 @@ Customers can log in to browse available equipment, filter based on price and av
 
 
 
-System Composition:
+System Composition:	
 This application consists of two main parts:
 
 Frontend:
